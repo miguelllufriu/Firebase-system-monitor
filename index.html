@@ -9,27 +9,25 @@
    </head>
    <body>
       <img class="background" src="./assets/background.svg" alt="Cool background made with trianglify!">
+      <main>
+
+         <header id="headerWrapper">
+            <h1 id="hostname">Hostname</h1>
+         </header>
+         <section id="mainWrapper">
+            <aside id="topProcess">
+               No hay datos disponibles
+            </aside>
+            <section id="cpuUsageCanvasWrapper">
+               <canvas id="cpuUsageCanvas" width="300px" height="250px"></canvas>
+            </section>
+         </section>
+
+      </main>
+
       <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js"></script>
       <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-database.js"></script>
-      <script>
-        // Initialize Firebase
-         var config = {
-            apiKey: "AIzaSyBhHQtskONKLeKIdZuaCygwSr09ImgQBac",
-            authDomain: "systemmonitor-2b015.firebaseapp.com",
-            databaseURL: "https://systemmonitor-2b015.firebaseio.com",
-            projectId: "systemmonitor-2b015",
-            storageBucket: "systemmonitor-2b015.appspot.com",
-            messagingSenderId: "153297484955"
-         };
-         firebase.initializeApp(config);
-      </script>
-      <script>
-         const database = firebase.database().ref().child("system-info");
-         database.on("value", snapshot => {
-            const data = snapshot.val();
-            document.body.innerHTML = `<pre><code>${JSON.stringify(data, null, 4)}</code></pre>`
-            //console.log(data)
-         })
-      </script>   
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+      <script src="./scripts/main.js"></script>   
    </body>
 </html>

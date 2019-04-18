@@ -7,4 +7,25 @@
     width: 100%;
     height: 100vh;
     position: fixed;
+    z-index: -10000;
+}
+#headerWrapper {
+    max-width: 960px;
+    margin: 0 auto;
+    height: 60px;
+}
+#mainWrapper{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+#mainWrapper #topProcess{
+    max-width: 300px;
+    min-height: 250px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, .3);
+}
+#cpuUsageCanvasWrapper{
+    max-width: 300px;
+    max-height: 250px;
+    background-color: rgba(255, 255, 255, .3);
 }
