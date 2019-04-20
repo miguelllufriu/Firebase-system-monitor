@@ -34,7 +34,7 @@ const cpuUsageChart = new Chart(cpuUsageCanvas, {
     label: '',
     data: {
         datasets: [{
-            label: 'CPU:',
+            label: 'CPU',
             data: []
         }]
     },
