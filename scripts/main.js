@@ -16,9 +16,10 @@ const cpuUsageCanvas = document.getElementById('cpuUsageCanvas').getContext('2d'
 const database = firebase.database().ref().child("system-info");
 database.on("value", snapshot => {
     const data = snapshot.val();
+    
     hostnameTag.innerHTML = data.hostname;
     
-    addData(cpuUsageChart, null, data.cpuUsageUpdate.use)
+    addDataStreaming(cpuUsageChart, null, data.cpuUsageUpdate.use)
 })
 
 const cpuUsageChart = new Chart(cpuUsageCanvas, {
@@ -26,14 +27,17 @@ const cpuUsageChart = new Chart(cpuUsageCanvas, {
     label: '',
     data: {
         datasets: [{
-            label: 'Uso de CPU',
+            label: 'CPU',
             data: []
         }]
     },
     options: {
-        tension: 0,
         legend: {
-            display: false
+            display: true,
+            labels: {
+                fontColor: 'rgb(50, 200, 50)',
+                boxWidth: 0
+            },
         },
         scales: {
             yAxes: [{
@@ -43,13 +47,19 @@ const cpuUsageChart = new Chart(cpuUsageCanvas, {
                 },
                 gridLines: {
                     steps: 10,
-                    stepValue: 5,
+                    stepValue: 1,
                     display: false
                  }
             }],
             xAxes: [{
                 gridLines: {
                     display: false,
+                 },
+                 type: 'realtime',
+                 realtime:{
+                        duration: 20000,
+                        refresh: 1000,
+                        delay: 2000
                  }
             }],
         },
@@ -61,18 +71,11 @@ const cpuUsageChart = new Chart(cpuUsageCanvas, {
     }
 });
 
-function addData(chart, label, data) {
+function addDataStreaming(chart, label, data) {
     chart.data.labels.push('');
     chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
+        dataset.label = 'Actual: ' + data
+        dataset.data.push({x:Date.now(), y: data});     
     });
-    chart.update();
-}
-
-function removeData(chart) {
-    chart.data.labels.pop();
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.pop();
-    });
-    chart.update();
+    chart.update({preservation: true});
 }
