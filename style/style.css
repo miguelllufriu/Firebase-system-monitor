@@ -19,6 +19,7 @@
     margin: 0 auto;
     display: flex;
     flex-flow: row wrap;
+    justify-content: space-between;
 }
 #mainWrapper #topProcess{
     max-width: 400px;
@@ -28,10 +29,25 @@
     padding: 25px;
     background-color: rgba(255, 255, 255, .3);
 }
-#cpuUsageCanvasWrapper{
-    max-width: 300px;
-    max-height: 250px;
+.usageCanvasWrapper{
     margin: 10px;
+    padding: 15px 10px;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, .3);
+}
+#listTopProcess{
+    list-style-type: none;
+}
+#listTopProcess .processItem {
+
+}
+#listTopProcess .processItem::before{
+    content: '\🔥';
+    margin-left: -15px;
+    margin-right: 10px;
+}
+#memoryUsageCanvasWrapper {
+    max-width: 400px;
+    height: auto;
+    padding: 15px;
 }
