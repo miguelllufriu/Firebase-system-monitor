@@ -39,6 +39,7 @@ const cpuUsageChart = new Chart(cpuUsageCanvas, {
         }]
     },
     options: {
+        maintainAspectRatio: false,
         legend: {
             display: true,
             labels: {
@@ -87,6 +88,7 @@ const tempUsageChart = new Chart(tempUsageCanvas, {
         }]
     },
     options: {
+        maintainAspectRatio: false,
         legend: {
             display: true,
             labels: {
@@ -136,7 +138,7 @@ const memoryUsageChart = new Chart(memoryUsageCanvas, {
         labels: ['Registrada ','En caché ', 'Libre ', 'Usada ']
     },
     options: {
-        
+        maintainAspectRatio: false,
     }
 });
 

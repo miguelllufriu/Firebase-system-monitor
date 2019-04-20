@@ -30,6 +30,9 @@
     background-color: rgba(255, 255, 255, .3);
 }
 .usageCanvasWrapper{
+    position: relative;
+    height: 30vh;
+    width: 40vw;
     margin: 10px;
     padding: 15px 10px;
     border-radius: 5px;
@@ -47,7 +50,7 @@
     margin-right: 10px;
 }
 #memoryUsageCanvasWrapper {
-    max-width: 400px;
+    max-width: 300px;
     height: auto;
     padding: 15px;
 }
