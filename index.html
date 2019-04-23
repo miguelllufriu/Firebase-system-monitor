@@ -2,33 +2,34 @@
    <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
       <title>
-         System Status
+         Firebase System Monitor
       </title>
       <link rel="stylesheet" href="./style/style.css">
    </head>
    <body>
-      <img class="background" src="./assets/background.svg" alt="Cool background made with trianglify!">
       <main>
-
          <header id="headerWrapper">
             <h1 id="hostname">Hostname</h1>
          </header>
          <section id="mainWrapper">
-            <aside id="topProcess">
-               <h3>Top 10 procesos:</h5>
-               <ul id="listTopProcess">
-                  No hay datos disponibles
-               </ul>
+            <aside id="asideWrapper">
+               <section id="memoryUsageCanvasWrapper" class="usageCanvasWrapper">
+                  <h5>USO DE MEMORIA</h5>
+                     <canvas id="memoryUsageCanvas"></canvas>
+               </section>
+               <section>
+                  <h5>TOP 10 PROCESOS:</h5>
+                  <ul id="listTopProcess">
+                     No hay datos disponibles
+                  </ul>
+               </section>
             </aside>
-            <section id="cpuUsageCanvasWrapper" class="usageCanvasWrapper">
-               <canvas id="cpuUsageCanvas" ></canvas>
-            </section>
-            <section id="tempUsageCanvasWrapper" class="usageCanvasWrapper">
-               <canvas id="tempUsageCanvas" ></canvas>
-            </section>
-            <section id="memoryUsageCanvasWrapper" class="usageCanvasWrapper">
-                  <canvas id="memoryUsageCanvas"></canvas>
+            <section id="mainInfoWrapper">
+                  <section id="usageCanvasWrapper" class="usageCanvasWrapper">
+                        <canvas id="usageChartCanvas" ></canvas>
+                  </section>
             </section>
          </section>
 

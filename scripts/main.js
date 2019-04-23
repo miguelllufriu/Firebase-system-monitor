@@ -12,8 +12,7 @@ firebase.initializeApp(config);
  
 const hostnameTag = document.getElementById('hostname')
 const topProcessList = document.getElementById('listTopProcess')
-const cpuUsageCanvas = document.getElementById('cpuUsageCanvas').getContext('2d')
-const tempUsageCanvas = document.getElementById('tempUsageCanvas').getContext('2d')
+const usageChartCanvas = document.getElementById('usageChartCanvas').getContext('2d')
 const memoryUsageCanvas = document.getElementById('memoryUsageCanvas').getContext('2d')
 
 const database = firebase.database().ref().child("system-info")
@@ -23,69 +22,25 @@ database.on("value", snapshot => {
     hostnameTag.innerHTML = data.hostname
     
     updateTopList(data.toplist)
-    addDataStreaming(cpuUsageChart, null, data.cpuUsageUpdate.use)
-    addDataStreaming(tempUsageChart, null, data.temperatureUpdate.temp)
+    addDataStreaming(usageChart, 0, data.cpuUsageUpdate.use)
+    addDataStreaming(usageChart, 1, data.temperatureUpdate.temp)
     updateMemoryChart(memoryUsageChart, data.memoryUpdate)
 
 })
 
-const cpuUsageChart = new Chart(cpuUsageCanvas, {
+const usageChart = new Chart(usageChartCanvas, {
     type: 'line',
     label: '',
     data: {
         datasets: [{
-            label: 'CPU',
+            label: '',
             data: []
-        }]
-    },
-    options: {
-        maintainAspectRatio: false,
-        legend: {
-            display: true,
-            labels: {
-                boxWidth: 0
-            },
         },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    max: 100,
-                },
-                gridLines: {
-                    steps: 10,
-                    stepValue: 1,
-                    display: false
-                 }
-            }],
-            xAxes: [{
-                gridLines: {
-                    display: false,
-                 },
-                 type: 'realtime',
-                 realtime:{
-                        duration: 20000,
-                        refresh: 1000,
-                        delay: 2000
-                 }
-            }],
-        },
-        elements: {
-            point: {
-                radius: 0
-            }
+        {
+            label: '',
+            data:[]
         }
-    }
-})
-
-const tempUsageChart = new Chart(tempUsageCanvas, {
-    type: 'line',
-    label: '',
-    data: {
-        datasets: [{
-            label: 'Temperatura',
-            data: []
-        }]
+        ]
     },
     options: {
         maintainAspectRatio: false,
@@ -142,11 +97,9 @@ const memoryUsageChart = new Chart(memoryUsageCanvas, {
     }
 });
 
-function addDataStreaming (chart, label, data) {
+function addDataStreaming (chart, level, data) {
     chart.data.labels.push('')
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.push({x:Date.now(), y: data})     
-    })
+    chart.data.datasets[level].data.push({x:Date.now(), y: data});
     chart.update({preservation: true})
 }
 
